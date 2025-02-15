@@ -33,6 +33,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     @Override
     public UserDetailsService userDetailsService() {
+        System.out.println("Configurando usuário em memória..."); // Log para depuração
+
         // Codifica a senha antes de criar o usuário
         String encodedPassword = passwordEncoder().encode("senha123");
 
