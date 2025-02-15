@@ -15,15 +15,17 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-            .authorizeRequests()
-                .antMatchers("/orders/**").authenticated() // Protege os endpoints /orders/**
-                .anyRequest().permitAll() // Permite acesso a todos os outros endpoints
-                .and()
-            .httpBasic(); // Habilita autenticação básica
-    }
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+	    http
+	        .csrf().disable() // Desativa CSRF para testes
+	        .authorizeRequests()
+	            .antMatchers("/orders/**").authenticated()
+	            .antMatchers("/public/**").permitAll()
+	            .anyRequest().permitAll()
+	        .and()
+	        .httpBasic();
+	}
 
     @Bean
     public PasswordEncoder passwordEncoder() {
