@@ -1,0 +1,47 @@
+
+## Server
+server:
+  compression:
+    enabled: true
+    mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json
+    min-response-size: 1024
+  http2:
+    enabled: true
+  port: 8082
+  servlet:
+    context-path: /gerenciamento-api
+    
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: sa
+  h2:
+    console:
+      enabled: true
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+      
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html # Caminho para a UI do Swagger
+    tags-sorter: alpha # Ordena as tags alfabeticamente
+    operations-sorter: alpha # Ordena as operações alfabeticamente
+  api-docs:
+    path: /v3/api-docs # Caminho para o JSON da documentação
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
+  show-actuator: true # Habilita a documentação dos endpoints do Actuator
+   
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always   
+      
